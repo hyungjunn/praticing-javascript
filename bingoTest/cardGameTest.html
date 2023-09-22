@@ -86,7 +86,7 @@
         var shuffleButton = document.getElementById("shuffle");
         // 3. 이벤트 등록
         hideButton.onclick = hide;
-        showButton = show;
+        showButton.onclick = show;
         shuffleButton.onclick = shuffle;
 
         var inputArr = document.getElementsByTagName("img");
@@ -129,7 +129,10 @@
     }
     // 카드를 보여준다.
     function show() {
-
+        var inputArr = document.getElementsByTagName("img");
+        for (i = 0; i < 52; i++) {
+            inputArr[i].hidden = false;
+        }
     }
 
     // 카드를 섞는다.
