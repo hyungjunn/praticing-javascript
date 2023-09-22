@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Board</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        td {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #d92020;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="bingo-table"></table>
+    <script>
+        const bingoTable = document.getElementById('bingo-table');
+        const numbers = [];
+
+        // 1부터 25까지의 숫자를 생성하고 섞기
+        for (let i = 1; i <= 25; i++) {
+            numbers.push(i);
+        }
+        numbers.sort(() => Math.random() - 0.5);
+
+        // 빙고판 그리기
+        for (let row = 0; row < 5; row++) {
+            const tr = document.createElement('tr'); // tr : 행
+            for (let col = 0; col < 5; col++) {
+                const td = document.createElement('td'); // td : 열
+                td.textContent = numbers[row * 5 + col];
+                tr.appendChild(td);
+            }
+            bingoTable.appendChild(tr);
+        }
+    </script>
+</body>
+
+</html>

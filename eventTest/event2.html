@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--멀티플 옵션 만들기-->
+    <select name="" id="" multiple="multiple">
+        <option id="농구">농구</option>
+        <option id="축구">축구</option>
+        <option id="야구">야구</option>
+        <option id="배구">배구</option>
+    </select>
+    <div>
+        <button id=""> > </button><br>
+        <button>
+            < </button><br>
+                <button> >> </button><br>
+                <button>
+                    << </button><br>
+    </div>
+    <select name="" id="">
+
+    </select>
+    <script>
+        // 1. 쉬운거부터 해보기 : 농구
+        var nongGu = document.getElementById("농구");
+        nongGu.onclick = clickNongGu
+        // 1-1. 농구선택
+        // 1-2. > 클릭
+        // 1-3. 농구가 오른쪽 박스에 생김, 왼쪽 박스엔 농구 사라짐
+
+
+        // 2. 
+        // 2-1. 오른쪽 농구 선택
+        // 2-2. < 클릭
+        // 2-3. 농구가 왼쪽 박스에 생김, 오른쪽 박스엔 농구 사라짐
+
+        // 3. 전체
+        // 3-1. >> 클릭
+        // 3-2. 오른쪽 박스에 전체가 다 생김, 왼쪽 박스엔 전체가 사라짐.
+        
+        // 4. 
+        // 4-1. << 클릭
+        // 4-2. 왼쪽 박스에 전체가 다 생김, 오른쪽 박스에 전체가 사라짐.
+    </script>
+</body>
+
+</html>

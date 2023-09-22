@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            display: inline-block;
+        }
+
+        textarea {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--체크박스 만들기-->
+    <form>
+        <div>
+            <input id="전체" type="checkbox">전체<br>
+            <input id="농구" name="sport" type="checkbox">농구<br>
+            <input id="배구" name="sport" type="checkbox">배구<br>
+            <input id="야구" name="sport" type="checkbox">야구<br>
+            <input id="축구" name="sport" type="checkbox">축구<br>
+        </div>
+        <!--<textarea>만들기-->
+        <textarea name="textbox" id="textarea"></textarea>
+    </form>
+    <script>
+        var sports = document.getElementsByName("sport");
+        var box = document.querySelector("textarea");
+        window.onload = function () {
+            // 1. <input>태그에 접근
+
+            // 2. 이벤트 등록
+            for (let v of sports) {
+                //console.dir(v);
+                v.onclick = ccb;
+            }
+            // 3. '농구','배구','야구','축구'체크박스에 각각 체크되면
+            //     <textarea>에 '농구', '배구', '야구', '축구' 각각 출력
+
+            // 전체
+            // 1. <input>태그에 접근
+            var all = document.getElementById("전체");
+            // 2. 이벤트 등록
+            all.onclick = clickAllCheckBox;
+            // 3-1. '전체'체크박스를 ON
+            // 3-2. '농구','배구','야구','축구'체크박스에 체크됨과 동시에
+            //      <textarea>에 '농구', '배구', '야구', '축구' 출력
+            // 3-3. '전체'체크박스를 OFF
+            // 3-4. '전체'체크박스에 체크가 해제됨과 동시에
+            //      '농구', '배구', '야구', '축구'체크박스도 OFF
+            //      <textarea>에 '농구', '배구', '야구', '축구' 없어짐
+            // '농구', '배구', '야구', '축구' => 배열 처리
+            function clickAllCheckBox() {
+                var sport = document.getElementsByName("sport");
+                box.innerHTML = '';
+                for (var i = 0; i < sport.length; i++) {
+                    if (all.checked) {
+                        sport[i].checked = true;
+                        box.innerHTML += sport[i].id + ',';
+                    } else {
+                        sport[i].checked = false;
+                    }
+                }
+            }
+        }
+        let ccb = function clickCheckBox() {
+            box.innerHTML = '';
+            for (var i = 0; i < sports.length; i++) {
+                //console.log(sports[i].checked);
+                if (sports[i].checked) {
+                    //box.innerHTML += 'Hello';
+                    box.innerHTML += sports[i].id + ',';
+                } else {
+                    box.innerHTML += '';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

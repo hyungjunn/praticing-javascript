@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        select {
+            width: 100px;
+            height: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <select name="" id="left" multiple>
+        <option value="농구">농구</option>
+        <option value="축구">축구</option>
+        <option value="야구">야구</option>
+        <option value="배구">배구</option>
+    </select>
+    <button id="toLeft"></button>
+    <button id="allToLeft"></button>
+    <button id="toRigth"></button>
+    <button id="allToRight"></button>
+
+    <select name="" id="right" multiple="multiple"></select>
+</body>
+<script>
+    window.load = function () {
+        // 1. 버튼에 이벤트 걸기
+        // 2. 요소에 접근
+
+        var leftBtn = document.getElementsById("toLeft");
+        var rightBtn = document.getElementsById("toRight")
+        var allLeftBtn = document.getElementsById("allRoLeft")
+        var allRightBtn = document.getElementsById("allToRight")
+
+        // 3. 이벤트 등록
+        leftBtn = moveToLeft;
+        rightBtn = moveToRight;
+        allLeftBtn = moveAllToLeft;
+        allRightBtn = moveAllToRight;
+    }
+
+    // 선택된 것을 from에서 to로 옮긴다.
+    function moveSelected(from, to) {
+        for (i = 0; i < from.length; i++)
+            to.append(from[i]);
+    }
+
+    // target의 모든 option을 선택하게 한다.
+    function selectAll(target) {
+        for (i = 0; i < left.length; i++)
+            left[i].selected = true;
+    }
+
+    function moveAllToLeft() {
+        selectAll(right);
+        moveSelected(left, right);
+    }
+
+    function moveAllToRight() {
+        selectAll(left);
+        moveSelected(right, left);
+    }
+
+    function moveToRight() {
+        moveSelected(left, right);
+    }
+
+    // 오른쪽에 선택된 것을 왼쪽으로 옮긴다.
+    function moveToLeft() {
+        // 선택된 것을 왼쪽으로 옮긴다.
+        moveSelected(right, left);
+    }
+</script>
+
+</html>

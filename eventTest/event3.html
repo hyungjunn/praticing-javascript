@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        select {
+            display: inline-block;
+            width: 100px;
+            height: 200px;
+        }
+
+        div {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <!--멀티플 옵션 만들기-->
+    <select id="sport1" name="sport1" multiple="multiple">
+        <option id="농구">농구</option>
+        <option id="축구">축구</option>
+        <option id="야구">야구</option>
+        <option id="배구">배구</option>
+    </select>
+    <div>
+        <button id="button1"> > </button><br>
+        <button id="button2">
+            < </button><br>
+                <button id="button3"> >> </button><br>
+                <button id="button4">
+                    << </button><br>
+    </div>
+    <select id="sport2" name="sport2" multiple="multiple">
+        <option></option>
+        <option></option>
+        <option></option>
+        <option></option>
+    </select>
+    <script>
+        var from = document.getElementById("sport1");
+        var to = document.getElementById("sport2");
+        var button1 = document.getElementById("button1");
+        var button2 = document.getElementById("button2");
+        var button3 = document.getElementById("button3");
+        var button4 = document.getElementById("button4");
+
+        window.onload = function () {
+            for (let v of from.options) {
+                v.onclick = moving;
+            }
+            button1.onclick = moving;
+
+            let moving = function moveTo(from, to) {
+                // select(from)안에 있는 option을 선택     
+                // button을 클릭하면
+                // select(to)에 선택한 항목의 단어가 생김, 선택한 select(from)에서의 단어는 사라짐.
+                for (var i = 0; i < from.length; i++) {
+                    alert(i);
+                    if (from.options[i].clicked == true && button1.clicked == true) {
+                        alert(i);
+                        //document.getElementById("sport1").innerHTML += from.options[i].id;
+                    }
+                }
+            }
+
+            // 1. Left -> Right
+            function moveLeftToRight() {
+                moveTo(left, right)
+            }
+            // 2. Right -> Left
+            function moveRigthToLeft() {
+                moveTo(right, left)
+            }
+        }
+    </script>
+</body>
+
+</html>
