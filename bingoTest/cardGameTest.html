@@ -97,9 +97,7 @@
         // 카드 전부 뒷면으로 만들기
         for (i = 0; i < 52; i++) {
             //inputArr[i].src = "/Users/hyungjunlim/Downloads/card_img/52.png";
-            //inputArr[i] = inputArr[52];
-            //document.images[i].src = inputArr[52].src;
-
+            document.images[i].src = inputArr[52].src;
         }
     }
 
@@ -108,11 +106,7 @@
         var inputArr = document.getElementsByTagName("img");
         console.dir(e);
         // 1. 카드를 클릭
-        // 2. 카드가 뒤집힌다.
-        //for (i = 0; i < 52; i++) {
-        //    document.images[i].src = inputArr[i].src;
-        //}
-        // 3. 만약, 카드가 앞면일 경우에 카드가 뒤집히지 않는다.
+        // 2. 
     }
 
     // 카드를 뒤집다.
