@@ -85,7 +85,7 @@
         var showButton = document.getElementById("show");
         var shuffleButton = document.getElementById("shuffle");
         // 3. 이벤트 등록
-        hideButton = hide;
+        hideButton.onclick = hide;
         showButton = show;
         shuffleButton.onclick = shuffle;
 
@@ -98,7 +98,8 @@
         for (i = 0; i < 52; i++) {
             //inputArr[i].src = "/Users/hyungjunlim/Downloads/card_img/52.png";
             //inputArr[i] = inputArr[52];
-            document.images[i].src = inputArr[52].src;
+            //document.images[i].src = inputArr[52].src;
+
         }
     }
 
@@ -119,13 +120,14 @@
 
     }
 
-    // 카드가 뒷면을 나오게 한다(숨긴다).
-    // 앞 -> 뒤
+    // 카드를 숨긴다.
     function hide() {
-
+        var inputArr = document.getElementsByTagName("img");
+        for (i = 0; i < 52; i++) {
+            inputArr[i].hidden = true;
+        }
     }
-    // 카드가 앞면을 나오게 한다(보여준다).
-    // 뒤 -> 앞
+    // 카드를 보여준다.
     function show() {
 
     }
@@ -146,7 +148,7 @@
             inputArr[i].src = arr[i];
         }
     }
-    // e.src : 기본 이상한 그림과 글씨가 나옴>>>hide할때 쓰일까??
+    // e.src : 기본 이상한 그림과 글씨가 나옴 >>> hide할때 쓰일까??
 </script>
 
 </html>
