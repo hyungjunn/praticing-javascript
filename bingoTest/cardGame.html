@@ -19,11 +19,10 @@
             height: 130px;
         }
     </style>
-
-    <body>
-        <button>hide</button>
-        <button>show</button>
-        <button>shuffle</button><br>
+    <button id="hide">hide</button>
+    <button id="show">show</button>
+    <button id="shuffle">shuffle</button><br>
+    <div>
         <img src="/Users/hyungjunlim/Downloads/card_img/0.png" alt="A다이아">
         <img src="/Users/hyungjunlim/Downloads/card_img/1.png" alt="2다이아">
         <img src="/Users/hyungjunlim/Downloads/card_img/2.png" alt="3다이아">
@@ -76,6 +75,90 @@
         <img src="/Users/hyungjunlim/Downloads/card_img/49.png" alt="J스페이스">
         <img src="/Users/hyungjunlim/Downloads/card_img/50.png" alt="Q스페이스">
         <img src="/Users/hyungjunlim/Downloads/card_img/51.png" alt="K스페이스">
-    </body>
+        <img src="/Users/hyungjunlim/Downloads/card_img/52.png" alt="뒷면" hidden>
+    </div>
+</body>
+<script>
+    // 카드 앞면일 때의 src들을 배열에 저장해놓는다.
+    var inputArr = document.getElementsByTagName("img");
+    var srcs = [];
+    for (i = 0; i < 52; i++) {
+        srcs[i] = inputArr[i].src;
+    }
+    window.onload = function () {
+        // 1. 버튼에 이벤트 걸기
+        // 2. 버튼 요소에 접근
+        var hideButton = document.getElementById("hide");
+        var showButton = document.getElementById("show");
+        var shuffleButton = document.getElementById("shuffle");
+        // 3. 이벤트 등록
+        hideButton.onclick = hide;
+        showButton.onclick = show;
+        shuffleButton.onclick = shuffle;
+
+        // 각각의 카드에 click이벤트 걸기
+        for (i = 0; i < inputArr.length; i++) {
+            inputArr[i].onclick = clickCard;
+        }
+
+        // 카드 전부 뒷면으로 만들기
+        for (i = 0; i < 52; i++) {
+            inputArr[i].src = inputArr[52].src;
+        }
+    }
+
+    // 카드를 클릭한다.
+    function clickCard(e) {
+        console.dir(e.target);
+        // 1. 카드를 클릭
+        // 2. 1장을 선택하면 해당카드의 앞면을 보여준다.
+        for (i = 0; i < 52; i++) {
+            if (e.target.alt == inputArr[i].alt) {
+                e.target.src = srcs[i];
+            }
+        }
+        //inputArr[e.target].src = srcs[e.target]
+        // 3. 나머지 1장을 선택했을 때
+        // 3-1. 2장이 같으면 보여준다.
+        // 3-2. 2장이 다르면 다시 둘 다 뒤집는다.
+        // 4. 다 맞으면 성공
+    }
+
+    // 카드를 뒤집다.(뒷면->앞면)
+    //function reverse(clickedCard) {
+    //var inputArr = document.getElementsByTagName("img");
+    //    inputArr[clickedCard].src = srcs[clickedCard];
+    //}
+
+    // 카드를 숨긴다.
+    function hide() {
+        for (i = 0; i < 52; i++) {
+            inputArr[i].hidden = true;
+        }
+    }
+    // 카드를 보여준다.
+    function show() {
+        for (i = 0; i < 52; i++) {
+            inputArr[i].hidden = false;
+        }
+    }
+
+    // 카드를 섞는다.
+    function shuffle() {
+        // 1. 새로운 배열 arr 생성
+        var arr = [];
+        // 2. arr에  기존 카드의 src속성 담기
+        for (var i = 0; i < 52; i++) {
+            arr[i] = inputArr[i].src;
+        }
+        // 3. 카드 섞기
+        arr.sort(() => Math.random() - 0.5);
+        // 4. 섞여진 arr을 화면에 보여준다. 
+        for (i = 0; i < 52; i++) {
+            inputArr[i].src = arr[i];
+        }
+    }
+    // e.src : 기본 이상한 그림과 글씨가 나옴 >>> hide할때 쓰일까??
+</script>
 
 </html>

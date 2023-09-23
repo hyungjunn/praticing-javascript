@@ -78,6 +78,13 @@
 
 </body>
 <script>
+    // 카드 앞면일 때의 src들을 배열에 저장해놓는다.
+    var inputArr = document.getElementsByTagName("img");
+    var srcs = [];
+    shuffle(); // 처음부터 섞여야 srcs배열에 랜덤하게 카드들을 담을 수 있다.
+    for (i = 0; i < 52; i++) {
+        srcs[i] = inputArr[i].src;
+    }
     window.onload = function () {
         // 1. 버튼에 이벤트 걸기
         // 2. 버튼 요소에 접근
@@ -89,52 +96,48 @@
         showButton.onclick = show;
         shuffleButton.onclick = shuffle;
 
-        var inputArr = document.getElementsByTagName("img");
         // 각각의 카드에 click이벤트 걸기
         for (i = 0; i < inputArr.length; i++) {
             inputArr[i].onclick = clickCard;
         }
-        // 카드 앞면일 때의 src들을 배열에 저장해놓는다.
-        var srcs = [];
-        for (i = 0; i < 52; i++) {
-            srcs[i] = inputArr[i].src;
-        }
 
         // 카드 전부 뒷면으로 만들기
         for (i = 0; i < 52; i++) {
-            //inputArr[i].src = "/Users/hyungjunlim/Downloads/card_img/52.png";
             inputArr[i].src = inputArr[52].src;
         }
     }
 
     // 카드를 클릭한다.
     function clickCard(e) {
-        var inputArr = document.getElementsByTagName("img");
-        console.dir(e);
+        console.dir(e.target);
         // 1. 카드를 클릭
         // 2. 1장을 선택하면 해당카드의 앞면을 보여준다.
-        //inputArr[0].src = "/Users/hyungjunlim/Downloads/card_img/" + inputArr[0].alt + ".png";
+        for (i = 0; i < 52; i++) {
+            if (e.target.alt == inputArr[i].alt) {
+                e.target.src = srcs[i];
+            }
+        }
+        //inputArr[e.target].src = srcs[e.target]
         // 3. 나머지 1장을 선택했을 때
         // 3-1. 2장이 같으면 보여준다.
         // 3-2. 2장이 다르면 다시 둘 다 뒤집는다.
         // 4. 다 맞으면 성공
     }
 
-    // 카드를 뒤집다.
-    function reverse(from, to) {
-
-    }
+    // 카드를 뒤집다.(뒷면->앞면)
+    //function reverse(clickedCard) {
+    //var inputArr = document.getElementsByTagName("img");
+    //    inputArr[clickedCard].src = srcs[clickedCard];
+    //}
 
     // 카드를 숨긴다.
     function hide() {
-        var inputArr = document.getElementsByTagName("img");
         for (i = 0; i < 52; i++) {
             inputArr[i].hidden = true;
         }
     }
     // 카드를 보여준다.
     function show() {
-        var inputArr = document.getElementsByTagName("img");
         for (i = 0; i < 52; i++) {
             inputArr[i].hidden = false;
         }
@@ -142,7 +145,6 @@
 
     // 카드를 섞는다.
     function shuffle() {
-        var inputArr = document.getElementsByTagName("img");
         // 1. 새로운 배열 arr 생성
         var arr = [];
         // 2. arr에  기존 카드의 src속성 담기
