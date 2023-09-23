@@ -90,10 +90,16 @@
         shuffleButton.onclick = shuffle;
 
         var inputArr = document.getElementsByTagName("img");
-        // 카드에 click이벤트 걸기
+        // 각각의 카드에 click이벤트 걸기
         for (i = 0; i < inputArr.length; i++) {
             inputArr[i].onclick = clickCard;
         }
+        // 카드 앞면일 때의 src들을 배열에 저장해놓는다.
+        var srcs = [];
+        for (i = 0; i < 52; i++) {
+            srcs[i] = inputArr[i].src;
+        }
+
         // 카드 전부 뒷면으로 만들기
         for (i = 0; i < 52; i++) {
             //inputArr[i].src = "/Users/hyungjunlim/Downloads/card_img/52.png";
@@ -107,6 +113,7 @@
         console.dir(e);
         // 1. 카드를 클릭
         // 2. 1장을 선택하면 해당카드의 앞면을 보여준다.
+        //inputArr[0].src = "/Users/hyungjunlim/Downloads/card_img/" + inputArr[0].alt + ".png";
         // 3. 나머지 1장을 선택했을 때
         // 3-1. 2장이 같으면 보여준다.
         // 3-2. 2장이 다르면 다시 둘 다 뒤집는다.
