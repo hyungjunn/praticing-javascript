@@ -84,8 +84,6 @@
             if (Math.abs(a - b) == 26) {
                 alert("hello");
                 x[1].src = clickedCard.src;
-                count = 0;
-                x = [];
             } else {
                 x[0].src = inputArr[52].src;
                 if (x[0].alt == x[1].alt) {
@@ -93,9 +91,9 @@
                 } else {
                     x[1].src = inputArr[52].src;
                 }
-                count = 0;
-                x = [];
             }
+            count = 0;
+            x = [];
         }
     }
     // 카드를 뒤집는다.(뒤 -> 앞)
