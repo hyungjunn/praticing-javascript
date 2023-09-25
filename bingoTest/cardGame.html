@@ -41,6 +41,7 @@
     for (i = 0; i < 52; i++) {
         srcs[i] = inputArr[i].src;
     }
+    var count = 0;
     window.onload = function () {
         // 1. 버튼에 이벤트 걸기
         // 2. 버튼 요소에 접근
@@ -64,16 +65,38 @@
     }
 
     // 카드를 클릭했을 때 일어나는 일
+    var x = [];
+    var a = 0;
+    var b = 0;
     function clickCard(e) {
         console.dir(e.target);
         // 1. 카드를 클릭
         var clickedCard = e.target
         // 2. 해당카드의 앞면을 보여준다.
+        count++;
         Open(clickedCard);
-        // 3. 나머지 1장을 선택했을 때
-        // 3-1. 2장이 같으면 보여준다.
-        // 3-2. 2장이 다르면 다시 둘 다 뒤집는다.
-        // 4. 다 맞으면 성공
+        x.push(clickedCard);
+        if (count == 1) {
+            a = parseInt(x[0].src.match(/\d+/g)[0]);
+        }
+        if (count == 2) {
+            b = parseInt(x[1].src.match(/\d+/g)[0]);
+            if (Math.abs(a - b) == 26) {
+                alert("hello");
+                x[1].src = clickedCard.src;
+                count = 0;
+                x = [];
+            } else {
+                x[0].src = inputArr[52].src;
+                if (x[0].alt == x[1].alt) {
+                    x[1] = clickedCard.src;
+                } else {
+                    x[1].src = inputArr[52].src;
+                }
+                count = 0;
+                x = [];
+            }
+        }
     }
     // 카드를 뒤집는다.(뒤 -> 앞)
     function Open(Card) {
