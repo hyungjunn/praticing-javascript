@@ -67,26 +67,21 @@
     function clickCard(e) {
         console.dir(e.target);
         // 1. 카드를 클릭
-        // 2. 해당카드의 앞면을 보여준다.
         var clickedCard = e.target
+        // 2. 해당카드의 앞면을 보여준다.
         isOpen(clickedCard);
-        //for (i = 0; i < 52; i++) {
-        //    if (e.target.alt == inputArr[i].alt) {
-        //        e.target.src = srcs[i];
-        //e.target.src = inputArr[i].src;
-        //    }
-        //}
+        // 3. 나머지 1장을 선택했을 때
+        // 3-1. 2장이 같으면 보여준다.
+        // 3-2. 2장이 다르면 다시 둘 다 뒤집는다.
+        // 4. 다 맞으면 성공
     }
+    // 카드를 뒤집는다.(뒤 -> 앞)
     function isOpen(Card) {
         for (i = 0; i < 52; i++) {
             if (Card.alt == inputArr[i].alt) {
                 Card.src = srcs[i];
             }
         }
-        // 3. 나머지 1장을 선택했을 때
-        // 3-1. 2장이 같으면 보여준다.
-        // 3-2. 2장이 다르면 다시 둘 다 뒤집는다.
-        // 4. 다 맞으면 성공
     }
     //카드를 뒤집는다.(앞 -> 뒤)
     function isFlip(i) {
