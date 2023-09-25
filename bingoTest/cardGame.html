@@ -60,7 +60,7 @@
 
         // 카드 전부 뒷면으로 만들기
         for (i = 0; i < 52; i++) {
-            Flip(i);
+            flip(i);
         }
     }
 
@@ -74,35 +74,29 @@
         var clickedCard = e.target
         // 2. 해당카드의 앞면을 보여준다.
         count++;
-        Open(clickedCard);
+        openning(clickedCard);
         x.push(clickedCard);
-        if (count == 1) {
-            x[0].src = clickedCard.src;
-            //alert(parseInt(x[0].src.substring(45)));
-            a = parseInt(x[0].src.substring(45));
+        if (count % 2 == 1) {
+            a = parseInt(x[count - 1].src.substring(45));
         }
-        if (count == 2) {
-            //b = parseInt(x[1].src.match(/\d+/g)[0]);
-            //alert(parseInt(x[1].src.substring(45)));
-            b = parseInt(x[1].src.substring(45));
+        if (count % 2 == 0) {
+            b = parseInt(x[count - 1].src.substring(45));
             // 첫번째 카드와 두번째 카드가 짝
             if (Math.abs(a - b) == 26) {
-                x[1].src = clickedCard.src;
+                x[count - 1].src = clickedCard.src;
                 // 첫번째 카드와 두번째 카드가 짝이 아닐 때
             } else {
-                if (x[0].alt == x[1].alt) {
+                if (x[count - 2].alt == x[count - 1].alt) {
                     //        x[1] = clickedCard.src;
                 } else {
-                    x[0].src = inputArr[52].src;
-                    x[1].src = inputArr[52].src;
+                    flip(count - 2);
+                    flip(count - 1);
                 }
             }
-            count = 0;
-            x = [];
         }
     }
     // 카드를 뒤집는다.(뒤 -> 앞)
-    function Open(Card) {
+    function openning(Card) {
         for (i = 0; i < 52; i++) {
             if (Card.alt == inputArr[i].alt) {
                 Card.src = srcs[i];
@@ -110,7 +104,7 @@
         }
     }
     //카드를 뒤집는다.(앞 -> 뒤)
-    function Flip(i) {
+    function flip(i) {
         inputArr[i].src = inputArr[52].src;
     }
     // 카드를 숨긴다.
