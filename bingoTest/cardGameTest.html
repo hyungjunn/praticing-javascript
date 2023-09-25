@@ -80,8 +80,8 @@
 <script>
     // 카드 앞면일 때의 src들을 배열에 저장해놓는다.
     var inputArr = document.getElementsByTagName("img");
-    var srcs = [];
     shuffle(); // 처음부터 섞여야 srcs배열에 랜덤하게 카드들을 담을 수 있다.
+    var srcs = [];
     for (i = 0; i < 52; i++) {
         srcs[i] = inputArr[i].src;
     }
@@ -112,21 +112,26 @@
         console.dir(e.target);
         // 1. 카드를 클릭
         // 2. 1장을 선택하면 해당카드의 앞면을 보여준다.
+        // 3. 나머지 1장을 선택했을 때
+        // 3-1. 2장이 같으면 계속 보여준다.(2장의 src차이가 26이면)
         for (i = 0; i < 52; i++) {
             if (e.target.alt == inputArr[i].alt) {
+                //alert(srcs[i]);
+                e.target.classList.add(i);
                 e.target.src = srcs[i];
+                // 3-2. 2장이 다르면 다시 둘 다 뒤집는다.
+                if (Math.abs(parseInt(srcs[i].src.substring(38)) - e.target.src.substring(38)) != 26) {
+                    alert('Hello!')
+                    e.target.src = inputArr[52].src;
+                }
             }
         }
-        //inputArr[e.target].src = srcs[e.target]
-        // 3. 나머지 1장을 선택했을 때
-        // 3-1. 2장이 같으면 보여준다.
-        // 3-2. 2장이 다르면 다시 둘 다 뒤집는다.
         // 4. 다 맞으면 성공
     }
 
+
     // 카드를 뒤집다.(뒷면->앞면)
-    //function reverse(clickedCard) {
-    //var inputArr = document.getElementsByTagName("img");
+    //function isOpen(clickedCard) {
     //    inputArr[clickedCard].src = srcs[clickedCard];
     //}
 
@@ -158,7 +163,6 @@
             inputArr[i].src = arr[i];
         }
     }
-    // e.src : 기본 이상한 그림과 글씨가 나옴 >>> hide할때 쓰일까??
 </script>
 
 </html>
