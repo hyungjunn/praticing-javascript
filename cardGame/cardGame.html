@@ -75,23 +75,20 @@
         // 2. 해당카드의 앞면을 보여준다.
         count++;
         openning(clickedCard);
-        x.push(clickedCard);
+        x.push(clickedCard.src);
         if (count % 2 == 1) {
-            a = parseInt(x[count - 1].src.substring(45));
+            a = parseInt(x[count - 1].substring(45));
         }
         if (count % 2 == 0) {
-            b = parseInt(x[count - 1].src.substring(45));
+            b = parseInt(x[count - 1].substring(45));
             // 첫번째 카드와 두번째 카드가 짝
             if (Math.abs(a - b) == 26) {
-                x[count - 1].src = clickedCard.src;
+                x[count - 1] = clickedCard.src;
                 // 첫번째 카드와 두번째 카드가 짝이 아닐 때
             } else {
-                if (x[count - 2].alt == x[count - 1].alt) {
-                    //        x[1] = clickedCard.src;
-                } else {
-                    flip(count - 2);
-                    flip(count - 1);
-                }
+                // x[count - 1] = inputArr[52].src;
+                // x[count - 2] = inputArr[52].src;
+
             }
         }
     }
