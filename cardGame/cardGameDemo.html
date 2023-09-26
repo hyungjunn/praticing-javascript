@@ -30,6 +30,7 @@
     for (i = 0; i < 52; i++) {
         tmp += '<img src= ' + '"/Users/hyungjunlim/Downloads/card_img/' + i + '.png"'
             + 'alt =' + i + '>';
+        ;
     }
     var inputArrAll = document.getElementById('imgDiv');
     inputArrAll.innerHTML = tmp;
@@ -41,6 +42,8 @@
     for (i = 0; i < 52; i++) {
         srcs[i] = inputArr[i].src;
     }
+    //srcs = 섞은 후 
+
     window.onload = function () {
         // 1. 버튼에 이벤트 걸기
         // 2. 버튼 요소에 접근
@@ -59,7 +62,7 @@
 
         // 카드 전부 뒷면으로 만들기
         for (i = 0; i < 52; i++) {
-            flip(i);
+            Flip(i);
         }
     }
 
@@ -69,27 +72,21 @@
     var b = 0;
     var count = 0;
     function clickCard(e) {
-        console.dir(e.target);
-        // 1. 카드를 클릭
-        var clickedCard = e.target;
-        if (clickedCard.src == inputArr[52].src) {
-            // 2. 해당카드의 앞면을 보여준다.
+        var clickedCard = e.target
+        if (clickedCard.src === inputArr[52].src) { //밑에 문제를 방지하기 위해 조건문 추가
             count++;
-            openning(clickedCard);
+            Open(clickedCard);
             x.push(clickedCard);
-            // 첫번째 카드 클릭
             if (count == 1) {
-                a = parseInt(x[0].src.substring(45));
+                a = parseInt(x[0].src.match(/\d+/g)[0]);
+                console.log(a)
             }
-            // 두번째 카드 클릭
             if (count == 2) {
-                b = parseInt(x[1].src.substring(45));
-                // 첫번째 카드와 두번째 카드가 짝
+                b = parseInt(x[1].src.match(/\d+/g)[0]);
                 if (Math.abs(a - b) == 26) {
+                    alert("hello");
                     count = 0;
                     x = [];
-                    alert("Hello");
-                    // 첫번째 카드와 두번째 카드가 짝이 아닐 때
                 } else {
                     x[0].src = inputArr[52].src;   //문제) a카드 클릭 후 앞면인 a카드를 또 클릭하면 여기로 와서 뒷면으로 바뀜
                     if (x[0].alt == x[1].alt) {
@@ -103,16 +100,22 @@
             }
         }
     }
+
+    //srcs = 섞은 후 객체
+    //inputArr 섞기전 객체
     // 카드를 뒤집는다.(뒤 -> 앞)
-    function openning(Card) {
+    function Open(Card) {
+
+        console.log("뒤일떄만")
         for (i = 0; i < 52; i++) {
             if (Card.alt == inputArr[i].alt) {
                 Card.src = srcs[i];
             }
         }
+
     }
     //카드를 뒤집는다.(앞 -> 뒤)
-    function flip(i) {
+    function Flip(i) {
         inputArr[i].src = inputArr[52].src;
     }
     // 카드를 숨긴다.
