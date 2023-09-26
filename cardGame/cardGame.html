@@ -86,20 +86,18 @@
                 b = parseInt(x[1].src.substring(45));
                 // 첫번째 카드와 두번째 카드가 짝
                 if (Math.abs(a - b) == 26) {
-                    count = 0;
-                    x = [];
                     alert("Hello");
                     // 첫번째 카드와 두번째 카드가 짝이 아닐 때
                 } else {
-                    x[0].src = inputArr[52].src;   //문제) a카드 클릭 후 앞면인 a카드를 또 클릭하면 여기로 와서 뒷면으로 바뀜
+                    x[0].src = inputArr[52].src;   // 문제) a카드 클릭 후 앞면인 a카드를 또 클릭하면 여기로 와서 뒷면으로 바뀜
                     if (x[0].alt == x[1].alt) {
                         x[1] = clickedCard.src;
                     } else {
                         x[1].src = inputArr[52].src;
                     }
-                    count = 0;
-                    x = [];
                 }
+                count = 0;
+                x = [];
             }
         }
     }

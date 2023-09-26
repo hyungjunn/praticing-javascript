@@ -30,116 +30,40 @@
     for (i = 0; i < 52; i++) {
         tmp += '<img src= ' + '"/Users/hyungjunlim/Downloads/card_img/' + i + '.png"'
             + 'alt =' + i + '>';
-        ;
     }
-    var inputArrAll = document.getElementById('imgDiv');
-    inputArrAll.innerHTML = tmp;
-    // 카드 앞면일 때의 src들을 배열에 저장해놓는다.
-    var inputArr = document.getElementsByTagName("img");
-
-    var srcs = [];
-    shuffle(); // 처음부터 섞여야 srcs배열에 랜덤하게 카드들을 담을 수 있다.
-    for (i = 0; i < 52; i++) {
-        srcs[i] = inputArr[i].src;
-    }
-    //srcs = 섞은 후 
+    var allCard = document.getElementById('imgDiv'); // 전체 
+    var card = document.getElementsByTagName('img'); // 처음 각각의 카드
+    allCard.innerHTML = tmp; // HTML로 문자열 넣기
 
     window.onload = function () {
-        // 1. 버튼에 이벤트 걸기
-        // 2. 버튼 요소에 접근
         var hideButton = document.getElementById("hide");
         var showButton = document.getElementById("show");
         var shuffleButton = document.getElementById("shuffle");
-        // 3. 이벤트 등록
-        hideButton.onclick = hide;
-        showButton.onclick = show;
-        shuffleButton.onclick = shuffle;
 
-        // 각각의 카드에 click이벤트 걸기
-        for (i = 0; i < inputArr.length; i++) {
-            inputArr[i].onclick = clickCard;
-        }
+        hideButton.onclick = isHide;
+        showButton.onclick = isShow;
+        shuffleButton.onclick = isShuffle;
 
-        // 카드 전부 뒷면으로 만들기
+        // 각각의 카드에 onclick
         for (i = 0; i < 52; i++) {
-            Flip(i);
+            card[i].onclick = clickCard;
         }
     }
-
-    // 카드를 클릭했을 때 일어나는 일
-    var x = [];
-    var a = 0;
-    var b = 0;
-    var count = 0;
+    // 카드 클릭
     function clickCard(e) {
-        var clickedCard = e.target
-        if (clickedCard.src === inputArr[52].src) { //밑에 문제를 방지하기 위해 조건문 추가
-            count++;
-            Open(clickedCard);
-            x.push(clickedCard);
-            if (count == 1) {
-                a = parseInt(x[0].src.match(/\d+/g)[0]);
-                console.log(a)
-            }
-            if (count == 2) {
-                b = parseInt(x[1].src.match(/\d+/g)[0]);
-                if (Math.abs(a - b) == 26) {
-                    alert("hello");
-                    count = 0;
-                    x = [];
-                } else {
-                    x[0].src = inputArr[52].src;   //문제) a카드 클릭 후 앞면인 a카드를 또 클릭하면 여기로 와서 뒷면으로 바뀜
-                    if (x[0].alt == x[1].alt) {
-                        x[1] = clickedCard.src;
-                    } else {
-                        x[1].src = inputArr[52].src;
-                    }
-                    count = 0;
-                    x = [];
-                }
-            }
-        }
-    }
-
-    //srcs = 섞은 후 객체
-    //inputArr 섞기전 객체
-    // 카드를 뒤집는다.(뒤 -> 앞)
-    function Open(Card) {
-
-        console.log("뒤일떄만")
-        for (i = 0; i < 52; i++) {
-            if (Card.alt == inputArr[i].alt) {
-                Card.src = srcs[i];
-            }
-        }
 
     }
-    //카드를 뒤집는다.(앞 -> 뒤)
-    function Flip(i) {
-        inputArr[i].src = inputArr[52].src;
+    // 전부 다 뒷면
+    function isHide() {
+
     }
-    // 카드를 숨긴다.
-    function hide() {
-        inputArrAll.hidden = true;
+    // 전부 다 앞면
+    function isShow() {
+
     }
-    // 카드를 보여준다.
-    function show() {
-        inputArrAll.hidden = false;
-    }
-    // 카드를 섞는다.
-    function shuffle() {
-        // 1. 새로운 배열 arr 생성
-        var arr = [];
-        // 2. arr에  기존 카드의 src속성 담기
-        for (var i = 0; i < 52; i++) {
-            arr[i] = inputArr[i].src;
-        }
-        // 3. 카드 섞기
-        arr.sort(() => Math.random() - 0.5);
-        // 4. 섞여진 arr을 화면에 보여준다. 
-        for (i = 0; i < 52; i++) {
-            inputArr[i].src = arr[i];
-        }
+    // 
+    function isShuffle() {
+
     }
 </script>
 
